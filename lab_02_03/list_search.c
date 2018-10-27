@@ -42,7 +42,9 @@ position FindLast(position head)
     position target = head;
 
     while (target->next != NULL)
+    {
         target = target->next;
+    }
 
     return target;
 }
@@ -104,7 +106,9 @@ position FindPreviousSorted(position head, char const* surname)
 
     while (previous->next != NULL &&
            strcmp(previous->next->surname, surname) < 0)
-       previous = previous->next;
+    {
+        previous = previous->next;
+    }
 
     return previous;
 }

@@ -9,10 +9,9 @@
    \return Allocated and filled node
           (if allocation failed, return NULL)
 */
-position CreateNewElement(
-    char const* name,
-    char const* surname,
-    const int yearOfBirth)
+position CreateNewElement(char const* name,
+                          char const* surname,
+                          const int yearOfBirth)
 {
     position target = NULL;
 

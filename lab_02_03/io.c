@@ -64,7 +64,9 @@ int PrintListToConsole(position current)
 {
     // Check if list is empty
     if (current == NULL)
+    {
         printf("WARNING!!! Cannot print contents of empty list!\n");
+    }
 
     // Print data
     while (current != NULL)
@@ -156,9 +158,13 @@ int ReadDataFromFile(position head)
 
     insertMode = GetFileInsertMode();
     if (insertMode == USER_FILE_IN_ORDER)
+    {
         previous = head;
+    }
     else if (insertMode == USER_FILE_REVERSE_ORDER)
+    {
         previous = FindLast(head);
+    }
     else if (insertMode == USER_FILE_SORTED)
     {
         // First sort list
@@ -192,16 +198,22 @@ int ReadDataFromFile(position head)
             // Insert to list
             if (insertMode == USER_FILE_IN_ORDER ||
                 insertMode == USER_FILE_REVERSE_ORDER)
+            {
                 returnValue = Insert(previous, bufferName,
                 bufferSurname, bufferYearOfBirth);
+            }
             else if (insertMode == USER_FILE_SORTED)
+            {
                 returnValue = InsertSorted(previous, bufferName,
                     bufferSurname,
                     bufferYearOfBirth);
+            }
 
             // Check if data was inserted correctly
             if (returnValue == INSERT_OK)
+            {
                 printf("A node was inserted successfully\n");
+            }
             else if (returnValue == INSERT_ALLOC_FAILED)
             {
                 printf("ERROR!!! Allocation failed!\n");
@@ -211,7 +223,9 @@ int ReadDataFromFile(position head)
 
             // Update previous node
             if (insertMode == USER_FILE_IN_ORDER)
-            previous = previous->next;
+            {
+                previous = previous->next;
+            }
         }
     }
 

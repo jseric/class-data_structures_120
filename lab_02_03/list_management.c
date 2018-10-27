@@ -123,7 +123,9 @@ int Insert(position previous, char const* name,
 int DeleteAll(position head)
 {
     while (head->next != NULL)
+    {
         Delete(head);
+    }
 
     return VOID_OK;
 }
@@ -198,7 +200,9 @@ int Sort(position head)
                 second->next        = first;
             }
             else
+            {
                 first = first->next;
+            }
 
             previousFirst = previousFirst->next;
         }
