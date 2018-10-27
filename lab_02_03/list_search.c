@@ -14,21 +14,21 @@
 */
 int Find(position head)
 {
-  position target = NULL;
-  char targetSurname[SURNAME_LENGTH] = "\0";
-  GetLastName(targetSurname, "Last name of the element you want to find");
+    position target = NULL;
+    char targetSurname[SURNAME_LENGTH] = "\0";
+    GetLastName(targetSurname, "Last name of the element you want to find");
 
-  target = FindByLastName(head, targetSurname);
-  if (target == NULL)
-  {
-    printf("WARNING!!! Data not found!\n");
-    return FIND_NOT_FOUND;
-  }
+    target = FindByLastName(head, targetSurname);
+    if (target == NULL)
+    {
+        printf("WARNING!!! Data not found!\n");
+        return FIND_NOT_FOUND;
+    }
 
-  printf("Target data:\n");
-  printf("%s %s %d\n", target->name, target->surname, target->yearOfBirth);
+    printf("Target data:\n");
+    printf("%s %s %d\n", target->name, target->surname, target->yearOfBirth);
 
-  return FIND_OK;
+    return FIND_OK;
 }
 
 /*!
@@ -39,12 +39,12 @@ int Find(position head)
 */
 position FindLast(position head)
 {
-  position target = head;
+    position target = head;
 
-  while (target->next != NULL)
-    target = target->next;
+    while (target->next != NULL)
+        target = target->next;
 
-  return target;
+    return target;
 }
 
 /*!
@@ -56,21 +56,21 @@ position FindLast(position head)
 */
 position FindPrevious(position head, char const* targetSurname)
 {
-  position previous = head;
+    position previous = head;
 
-  while (previous->next != NULL &&
-         strcmp(previous->next->surname, targetSurname) != 0)
-  {
-    previous = previous->next;
-  }
+    while (previous->next != NULL &&
+           strcmp(previous->next->surname, targetSurname) != 0)
+    {
+        previous = previous->next;
+    }
 
-  if (previous->next == NULL)
-  {
-    // Target node not found
-    return NULL;
-  }
+    if (previous->next == NULL)
+    {
+        // Target node not found
+        return NULL;
+    }
 
-  return previous;
+    return previous;
 }
 
 /*!
@@ -81,14 +81,14 @@ position FindPrevious(position head, char const* targetSurname)
 */
 position FindByLastName(position head, char const* targetSurname)
 {
-  position previous = FindPrevious(head, targetSurname);
-  if (previous == NULL)
-  {
-    // Previous node not found
-    return NULL;
-  }
+    position previous = FindPrevious(head, targetSurname);
+    if (previous == NULL)
+    {
+        // Previous node not found
+        return NULL;
+    }
 
-  return previous->next;
+    return previous->next;
 }
 
 /*!
@@ -100,11 +100,11 @@ position FindByLastName(position head, char const* targetSurname)
 */
 position FindPreviousSorted(position head, char const* surname)
 {
-  position previous = head;
+    position previous = head;
 
-  while (previous->next != NULL &&
-         strcmp(previous->next->surname, surname) < 0)
-    previous = previous->next;
+    while (previous->next != NULL &&
+           strcmp(previous->next->surname, surname) < 0)
+       previous = previous->next;
 
-  return previous;
+    return previous;
 }

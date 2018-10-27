@@ -9,25 +9,27 @@
    \return Allocated and filled node
           (if allocation failed, return NULL)
 */
-position CreateNewElement(char const* name, char const* surname,
-                          const int yearOfBirth)
+position CreateNewElement(
+    char const* name,
+    char const* surname,
+    const int yearOfBirth)
 {
-  position target = NULL;
+    position target = NULL;
 
-  // Allocate node
-  target = (position) malloc(sizeof(person));
-  if (target == NULL)
-  {
-    printf("ERROR!!! Allocation failed!!!\n");
-    return NULL;
-  }
+    // Allocate node
+    target = (position) malloc(sizeof(person));
+    if (target == NULL)
+    {
+        printf("ERROR!!! Allocation failed!!!\n");
+        return NULL;
+    }
 
-  // Fill node with data
-  strcpy(target->name, name);
-  strcpy(target->surname, surname);
-  target->yearOfBirth = yearOfBirth;
+    // Fill node with data
+    strcpy(target->name, name);
+    strcpy(target->surname, surname);
+    target->yearOfBirth = yearOfBirth;
 
-  target->next = NULL;
+    target->next = NULL;
 
-  return target;
+    return target;
 }

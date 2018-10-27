@@ -12,8 +12,8 @@ int Delete(position);
 */
 int InsertToBeginning(position head)
 {
-  // Inert after head
-  return InsertAndGetData(head);
+    // Inert after head
+    return InsertAndGetData(head);
 }
 
 /*!
@@ -23,8 +23,8 @@ int InsertToBeginning(position head)
 */
 int InsertToEnd(position head)
 {
-  position last = FindLast(head);
-  return InsertAndGetData(last);
+    position last = FindLast(head);
+    return InsertAndGetData(last);
 }
 
 /*!
@@ -35,20 +35,20 @@ int InsertToEnd(position head)
 */
 int InsertBefore(position head)
 {
-  position previous = NULL;
+    position previous = NULL;
 
-  char afterSurname[SURNAME_LENGTH] = "\0";
-  GetLastName(afterSurname, "Last name of node to be inserted before");
+    char afterSurname[SURNAME_LENGTH] = "\0";
+    GetLastName(afterSurname, "Last name of node to be inserted before");
 
-  previous = FindPrevious(head, afterSurname);
-  if (previous == NULL)
-  {
-    // Node to be inserted before not found
-    printf("WARNING!!! Node to be inserted before not found\n");
-    return INSERT_NOT_FOUND;
-  }
+    previous = FindPrevious(head, afterSurname);
+    if (previous == NULL)
+    {
+        // Node to be inserted before not found
+        printf("WARNING!!! Node to be inserted before not found\n");
+        return INSERT_NOT_FOUND;
+    }
 
-  return InsertAndGetData(previous);
+    return InsertAndGetData(previous);
 }
 
 /*!
@@ -59,20 +59,20 @@ int InsertBefore(position head)
 */
 int InsertAfter(position head)
 {
-  position previous = NULL;
+    position previous = NULL;
 
-  char beforeSurname[SURNAME_LENGTH] = "\0";
-  GetLastName(beforeSurname, "Last name of node to be inserted after");
+    char beforeSurname[SURNAME_LENGTH] = "\0";
+    GetLastName(beforeSurname, "Last name of node to be inserted after");
 
-  previous = FindByLastName(head, beforeSurname);
-  if (previous == NULL)
-  {
-    // Node to be inserted after not found
-    printf("WARNING!!! Node to be inserted after not found\n");
-    return INSERT_NOT_FOUND;
-  }
+    previous = FindByLastName(head, beforeSurname);
+    if (previous == NULL)
+    {
+        // Node to be inserted after not found
+        printf("WARNING!!! Node to be inserted after not found\n");
+        return INSERT_NOT_FOUND;
+    }
 
-  return InsertAndGetData(previous);
+    return InsertAndGetData(previous);
 }
 
 /*!
@@ -87,8 +87,8 @@ int InsertAfter(position head)
 int InsertSorted(position head, char const* name,
                  char const* surname, const int yearOfBirth)
 {
-  position previous = FindPreviousSorted(head, surname);
-  return Insert(head, name, surname, yearOfBirth);
+    position previous = FindPreviousSorted(head, surname);
+    return Insert(head, name, surname, yearOfBirth);
 }
 
 /*!
@@ -103,17 +103,17 @@ int InsertSorted(position head, char const* name,
 int Insert(position previous, char const* name,
            char const* surname, const int yearOfBirth)
 {
-  position target = CreateNewElement(name, surname, yearOfBirth);
-  if (target == NULL)
-  {
-    return INSERT_ALLOC_FAILED;
-  }
+    position target = CreateNewElement(name, surname, yearOfBirth);
+    if (target == NULL)
+    {
+        return INSERT_ALLOC_FAILED;
+    }
 
-  // Insert to list
-  target->next   = previous->next;
-  previous->next = target;
+    // Insert to list
+    target->next   = previous->next;
+    previous->next = target;
 
-  return INSERT_OK;
+    return INSERT_OK;
 }
 
 /*!
@@ -122,10 +122,10 @@ int Insert(position previous, char const* name,
 */
 int DeleteAll(position head)
 {
-  while (head->next != NULL)
-    Delete(head);
+    while (head->next != NULL)
+        Delete(head);
 
-  return VOID_OK;
+    return VOID_OK;
 }
 
 /*!
@@ -135,20 +135,20 @@ int DeleteAll(position head)
 */
 int DeleteNode(position head)
 {
-  position previous = NULL;
-  char targetSurname[SURNAME_LENGTH] = "\0";
-  GetLastName(targetSurname, "Last name of the person you want to delete");
+    position previous = NULL;
+    char targetSurname[SURNAME_LENGTH] = "\0";
+    GetLastName(targetSurname, "Last name of the person you want to delete");
 
-  previous = FindPrevious(head, targetSurname);
-  if (previous == NULL)
-  {
-    // Target node not found
-    printf("WARNING!!! Data not found!\n");
-    return DELETE_NOT_FOUND;
-  }
+    previous = FindPrevious(head, targetSurname);
+    if (previous == NULL)
+    {
+        // Target node not found
+        printf("WARNING!!! Data not found!\n");
+        return DELETE_NOT_FOUND;
+    }
 
-  Delete(previous);
-  return DELETE_OK;
+    Delete(previous);
+    return DELETE_OK;
 }
 
 /*!
@@ -158,57 +158,57 @@ int DeleteNode(position head)
 */
 int Sort(position head)
 {
-  position first = NULL;
-  position second = NULL;
-  position previousFirst = NULL;
-  position last = NULL;
+    position first = NULL;
+    position second = NULL;
+    position previousFirst = NULL;
+    position last = NULL;
 
-  last = FindLast(head)->next;
+    last = FindLast(head)->next;
 
-  if (head->next == NULL)
-  {
-    printf("WARNING!!! List is empty!\n");
-    return SORT_EMPTY_LIST;
-  }
-
-  if ((head->next)->next == NULL)
-  {
-    printf("WARNING!!! List contains only 1 elemnt!\n");
-    return SORT_SINGLE_ELEMENT;
-  }
-
-  // Mail loop
-  while (head->next != last)
-  {
-    previousFirst = head;
-    first = previousFirst->next;
-
-    // Secondary loop
-    while (first->next != last)
+    if (head->next == NULL)
     {
-      second = first->next;
-
-      if (strcmp(first->surname, second->surname) > 0)
-      {
-        // Replace the 2 nodes
-        // Order after replacement:
-        // previousFirst->second->first
-        previousFirst->next = second;
-        first->next         = second->next;
-        second->next        = first;
-      }
-      else
-        first = first->next;
-
-      previousFirst = previousFirst->next;
+        printf("WARNING!!! List is empty!\n");
+        return SORT_EMPTY_LIST;
     }
 
-    // Move the last 1 step backwards,
-    // because everything after last is already sorted
-    last = previousFirst->next;
-  }
+    if (head->next->next == NULL)
+    {
+        printf("WARNING!!! List contains only 1 elemnt!\n");
+        return SORT_SINGLE_ELEMENT;
+    }
 
-  return SORT_OK;
+    // Mail loop
+    while (head->next != last)
+    {
+        previousFirst = head;
+        first = previousFirst->next;
+
+        // Secondary loop
+        while (first->next != last)
+        {
+            second = first->next;
+
+            if (strcmp(first->surname, second->surname) > 0)
+            {
+                // Replace the 2 nodes
+                // Order after replacement:
+                // previousFirst->second->first
+                previousFirst->next = second;
+                first->next         = second->next;
+                second->next        = first;
+            }
+            else
+                first = first->next;
+
+            previousFirst = previousFirst->next;
+        }
+
+        // Move the last 1 step backwards,
+        // because everything after last is already sorted
+        last = previousFirst->next;
+    }
+
+    return SORT_OK;
 }
 
 // ### PRIVATE FUNCTIONS ###
@@ -221,14 +221,14 @@ int Sort(position head)
 */
 int InsertAndGetData(position previous)
 {
-  char name[NAME_LENGTH] = "\0";
-  char surname[SURNAME_LENGTH] = "\0";
-  int yearOfBirth = 0;
+    char name[NAME_LENGTH] = "\0";
+    char surname[SURNAME_LENGTH] = "\0";
+    int yearOfBirth = 0;
 
-  // Get node data
-  GetNodeDataFromUser(name, surname, &yearOfBirth);
+    // Get node data
+    GetNodeDataFromUser(name, surname, &yearOfBirth);
 
-  return Insert(previous, name, surname, yearOfBirth);
+    return Insert(previous, name, surname, yearOfBirth);
 }
 
 /*!
@@ -237,10 +237,10 @@ int InsertAndGetData(position previous)
 */
 int Delete(position previous)
 {
-  position target = previous->next;
-  previous->next = target->next;
+    position target = previous->next;
+    previous->next = target->next;
 
-  free (target);
+    free (target);
 
-  return VOID_OK;
+    return VOID_OK;
 }

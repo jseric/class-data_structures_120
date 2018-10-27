@@ -6,10 +6,10 @@
 */
 
 #ifndef INTERNAL_DEPENDENCIES_H
-  #define INTERNAL_DEPENDENCIES_H
+    #define INTERNAL_DEPENDENCIES_H
 
-  #include "macros.h"
-  #include "data_collections.h"
-  #include "function_declarations.h"
+    #include "macros.h"
+    #include "data_collections.h"
+    #include "function_declarations.h"
 
 #endif
