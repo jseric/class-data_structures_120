@@ -16,9 +16,9 @@ int Find(position head)
 {
     position target = NULL;
     char targetSurname[SURNAME_LENGTH] = "\0";
-    GetLastName(targetSurname, "Last name of the element you want to find");
+    GetSurname(targetSurname, "Surname of the node you want to find");
 
-    target = FindByLastName(head, targetSurname);
+    target = FindBySurname(head, targetSurname);
     if (target == NULL)
     {
         printf("WARNING!!! Data not found!\n");
@@ -84,7 +84,7 @@ position FindPrevious(position head, char const* targetSurname)
           String containing last name of target node
    \return Pointer to target node
 */
-position FindByLastName(position head, char const* targetSurname)
+position FindBySurname(position head, char const* targetSurname)
 {
     position previous = FindPrevious(head, targetSurname);
     if (previous == NULL)

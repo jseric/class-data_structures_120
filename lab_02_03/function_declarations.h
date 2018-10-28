@@ -8,10 +8,10 @@
     #define FUNCTION_DECLARATIONS_H
 
     int MenuIO(void);
-    int GetNodeDataFromUser(personData*);
-    int GetLastName(char*, char const*);
+    int GetSurname(char*, char const*);
     int PrintListToConsole(position);
     int PrintListToFile(position);
+    int ReadDataFromConsole(personData*);
     int ReadDataFromFile(position);
 
     int InsertToBeginning(position);
@@ -30,11 +30,8 @@
 
     int Find(position);
     position FindLast(position);
-    position FindPrevious(position,
-                          char const*);
-    position FindByLastName(position,
-                            char const*);
-    position FindPreviousSorted(position,
-                                char const*);
+    position FindPrevious(position, char const*);
+    position FindBySurname(position, char const*);
+    position FindPreviousSorted(position, char const*);
 
 #endif

@@ -1,5 +1,5 @@
 /*!
-\file source.
+\file source.c
 \brief File containing main() function
 \author Josip Seric
 \date 25/10/2018
@@ -123,7 +123,7 @@ int main(int argc, char** argv)
             returnValue = ReadDataFromFile(&head);
             if (returnValue == INSERT_OK)
             {
-                printf("SUCCESS!!! List is sorted and all the nodes are inserted!!!\n");
+                printf("SUCCESS!!! All the nodes are inserted!!!\n");
             }
             else if (returnValue == INSERT_ALLOC_FAILED)
             {

@@ -2,7 +2,7 @@
 #include "internal_dependencies.h"
 
 // Function declarations
-int InsertAndGetData(position);
+int GetDataAndInsert(position);
 int Delete(position);
 
 /*!
@@ -12,8 +12,8 @@ int Delete(position);
 */
 int InsertToBeginning(position head)
 {
-    // Inert after head
-    return InsertAndGetData(head);
+    // Insert after head
+    return GetDataAndInsert(head);
 }
 
 /*!
@@ -24,7 +24,7 @@ int InsertToBeginning(position head)
 int InsertToEnd(position head)
 {
     position last = FindLast(head);
-    return InsertAndGetData(last);
+    return GetDataAndInsert(last);
 }
 
 /*!
@@ -38,7 +38,7 @@ int InsertBefore(position head)
     position previous = NULL;
 
     char afterSurname[SURNAME_LENGTH] = "\0";
-    GetLastName(afterSurname, "Last name of node to be inserted before");
+    GetSurname(afterSurname, "Surname of node to be inserted before");
 
     previous = FindPrevious(head, afterSurname);
     if (previous == NULL)
@@ -48,7 +48,7 @@ int InsertBefore(position head)
         return INSERT_NOT_FOUND;
     }
 
-    return InsertAndGetData(previous);
+    return GetDataAndInsert(previous);
 }
 
 /*!
@@ -62,9 +62,9 @@ int InsertAfter(position head)
     position previous = NULL;
 
     char beforeSurname[SURNAME_LENGTH] = "\0";
-    GetLastName(beforeSurname, "Last name of node to be inserted after");
+    GetSurname(beforeSurname, "Surname of node to be inserted after");
 
-    previous = FindByLastName(head, beforeSurname);
+    previous = FindBySurname(head, beforeSurname);
     if (previous == NULL)
     {
         // Node to be inserted after not found
@@ -72,7 +72,7 @@ int InsertAfter(position head)
         return INSERT_NOT_FOUND;
     }
 
-    return InsertAndGetData(previous);
+    return GetDataAndInsert(previous);
 }
 
 /*!
@@ -133,7 +133,7 @@ int DeleteNode(position head)
 {
     position previous = NULL;
     char targetSurname[SURNAME_LENGTH] = "\0";
-    GetLastName(targetSurname, "Last name of the person you want to delete");
+    GetSurname(targetSurname, "Surname of node you want to delete");
 
     previous = FindPrevious(head, targetSurname);
     if (previous == NULL)
@@ -158,8 +158,6 @@ int Sort(position head)
     position second = NULL;
     position previousFirst = NULL;
     position last = NULL;
-
-    last = FindLast(head)->next;
 
     if (head->next == NULL)
     {
@@ -203,7 +201,7 @@ int Sort(position head)
         }
 
         // Move the last 1 step backwards,
-        // because everything after last is already sorted
+        // because everything after last (including last) is already sorted
         last = previousFirst->next;
     }
 
@@ -218,12 +216,12 @@ int Sort(position head)
    \pre Find the previous element
    \return int value defining the result of function execution
 */
-int InsertAndGetData(position previous)
+int GetDataAndInsert(position previous)
 {
     personData data = { "\0", "\0", 0 };
 
     // Get node data
-    GetNodeDataFromUser(&data);
+    ReadDataFromConsole(&data);
 
     return Insert(previous, data);
 }

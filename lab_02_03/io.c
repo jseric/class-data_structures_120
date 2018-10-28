@@ -6,7 +6,7 @@
 // Function declarations
 int PrintUserMenu(void);
 int ClearScreen(void);
-int GetUserMenuSelection(void);
+int GetMenuSelection(void);
 int GetFileInsertMode(void);
 int GetFileName(char*);
 
@@ -20,24 +20,10 @@ int MenuIO(void)
     int target = 0;
 
     PrintUserMenu();
-    target = GetUserMenuSelection();
+    target = GetMenuSelection();
     ClearScreen();
 
     return target;
-}
-
-/*!
-   \brief Get node data from user
-   \param Pointer to personData object
-   \post Insert node to list
-*/
-int GetNodeDataFromUser(personData* target)
-{
-    printf("Please enter the node data:\n");
-    printf("Format: [firstName, lastName, yearOfBirth]\n");
-    scanf(" %s %s %d", target->name, target->surname, &target->yearOfBirth);
-
-    return VOID_OK;
 }
 
 /*!
@@ -45,14 +31,13 @@ int GetNodeDataFromUser(personData* target)
    \param String to contain last name,
           String containing additional info for the user
 */
-int GetLastName(char* surname, char const* info)
+int GetSurname(char* surname, char const* info)
 {
     printf("Please enter the %s\n", info);
     scanf(" %s", surname);
 
     return VOID_OK;
 }
-
 
 /*!
    \brief Print the contents of the list to console
@@ -118,6 +103,20 @@ int PrintListToFile(position current)
     fclose(file);
 
     return PRINT_OK;
+}
+
+/*!
+   \brief Get node data from user
+   \param Pointer to personData object
+   \post Insert node to list
+*/
+int ReadDataFromConsole(personData* target)
+{
+    printf("Please enter the node data:\n");
+    printf("Format: [firstName, lastName, yearOfBirth]\n");
+    scanf(" %s %s %d", target->name, target->surname, &target->yearOfBirth);
+
+    return VOID_OK;
 }
 
 /*!
@@ -264,7 +263,7 @@ int ClearScreen(void)
    \post Clear the screen
    \return User's selection
 */
-int GetUserMenuSelection(void)
+int GetMenuSelection(void)
 {
     int target = 0;
     scanf(" %d", &target);
@@ -290,6 +289,8 @@ int GetFileInsertMode(void)
 
     printf("Please enter your choice:\t");
     scanf(" %d", &target);
+
+    ClearScreen();
 
     return target;
 }
