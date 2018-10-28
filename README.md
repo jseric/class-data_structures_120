@@ -8,7 +8,7 @@ Ovdje možete pronaći riješene laboratorijske vježbe iz kolegija Strukture po
 
 Svrha ovog repozitorija jest da studentima pomogne pri učenju gradiva iz predavanja, te kao podsjetnik za laboratorijske vježbe. Kod je napisan na ispravan način, te je razdvojen u više funkcija, koje su raspodijeljene u više datoteka (.h i .c file). Također, veći dio koda je popraćen komentarima, u svrhu lakšeg čitanja i razumijevanja.
 
-### Neki savjeti za pisanje koda
+## Neki savjeti za pisanje koda
 
 - Sve varijable moraju biti inicijalizirane (0, "0", 0.0, NULL, ...)
   ```
