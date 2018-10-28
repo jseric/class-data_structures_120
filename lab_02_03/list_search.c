@@ -26,7 +26,9 @@ int Find(position head)
     }
 
     printf("Target data:\n");
-    printf("%s %s %d\n", target->name, target->surname, target->yearOfBirth);
+    printf("%s %s %d\n", target->data.name,
+                         target->data.surname,
+                         target->data.yearOfBirth);
 
     return FIND_OK;
 }
@@ -61,7 +63,8 @@ position FindPrevious(position head, char const* targetSurname)
     position previous = head;
 
     while (previous->next != NULL &&
-           strcmp(previous->next->surname, targetSurname) != 0)
+           strcmp(previous->next->data.surname,
+                  targetSurname) != 0)
     {
         previous = previous->next;
     }
@@ -105,7 +108,8 @@ position FindPreviousSorted(position head, char const* surname)
     position previous = head;
 
     while (previous->next != NULL &&
-           strcmp(previous->next->surname, surname) < 0)
+           strcmp(previous->next->data.surname,
+                  surname) < 0)
     {
         previous = previous->next;
     }

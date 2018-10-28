@@ -77,33 +77,27 @@ int InsertAfter(position head)
 
 /*!
    \brief Insert node to list in sorted fashion
-   \param Pointer to head
-          Array of name
-          Array of surname
-          Constant integer containing year of birth
+   \param Pointer to head,
+          Constant personData object
    \pre Get user data
    \return int value defining the result of function execution
 */
-int InsertSorted(position head, char const* name,
-                 char const* surname, const int yearOfBirth)
+int InsertSorted(position head, const personData data)
 {
-    position previous = FindPreviousSorted(head, surname);
-    return Insert(head, name, surname, yearOfBirth);
+    position previous = FindPreviousSorted(head, data.surname);
+    return Insert(head, data);
 }
 
 /*!
    \brief Insert new node with specified data to list after previous node
    \param Pointer to node after which the node will be inserted,
-          Char array of name
-          Char array of surname
-          Int containing year of birth
+          Constant personData object
    \pre Find the previous element
    \return int value defining the result of function execution
 */
-int Insert(position previous, char const* name,
-           char const* surname, const int yearOfBirth)
+int Insert(position previous, const personData data)
 {
-    position target = CreateNewElement(name, surname, yearOfBirth);
+    position target = CreateNewElement(data);
     if (target == NULL)
     {
         return INSERT_ALLOC_FAILED;
@@ -190,7 +184,8 @@ int Sort(position head)
         {
             second = first->next;
 
-            if (strcmp(first->surname, second->surname) > 0)
+            if (strcmp(first->data.surname,
+                       second->data.surname) > 0)
             {
                 // Replace the 2 nodes
                 // Order after replacement:
@@ -225,14 +220,12 @@ int Sort(position head)
 */
 int InsertAndGetData(position previous)
 {
-    char name[NAME_LENGTH] = "\0";
-    char surname[SURNAME_LENGTH] = "\0";
-    int yearOfBirth = 0;
+    personData data = { "\0", "\0", 0 };
 
     // Get node data
-    GetNodeDataFromUser(name, surname, &yearOfBirth);
+    GetNodeDataFromUser(&data);
 
-    return Insert(previous, name, surname, yearOfBirth);
+    return Insert(previous, data);
 }
 
 /*!

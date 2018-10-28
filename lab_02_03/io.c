@@ -28,16 +28,14 @@ int MenuIO(void)
 
 /*!
    \brief Get node data from user
-   \param Array of name,
-          Array of surname,
-          Pointer to int containing year of birth
+   \param Pointer to personData object
    \post Insert node to list
 */
-int GetNodeDataFromUser(char* name, char* surname, int* yearOfBirth)
+int GetNodeDataFromUser(personData* target)
 {
     printf("Please enter the node data:\n");
     printf("Format: [firstName, lastName, yearOfBirth]\n");
-    scanf(" %s %s %d", name, surname, yearOfBirth);
+    scanf(" %s %s %d", target->name, target->surname, &target->yearOfBirth);
 
     return VOID_OK;
 }
@@ -47,10 +45,10 @@ int GetNodeDataFromUser(char* name, char* surname, int* yearOfBirth)
    \param String to contain last name,
           String containing additional info for the user
 */
-int GetLastName(char* target, char const* info)
+int GetLastName(char* surname, char const* info)
 {
     printf("Please enter the %s\n", info);
-    scanf(" %s", target);
+    scanf(" %s", surname);
 
     return VOID_OK;
 }
@@ -71,7 +69,9 @@ int PrintListToConsole(position current)
     // Print data
     while (current != NULL)
     {
-        printf("%s %s %d\n", current->name, current->surname, current->yearOfBirth);
+        printf("%s %s %d\n", current->data.name,
+                             current->data.surname,
+                             current->data.yearOfBirth);
         current = current->next;
     }
 
@@ -104,19 +104,13 @@ int PrintListToFile(position current)
         return PRINT_FILE_WARNING;
     }
 
-    // Check if list is empty
-    if (current == NULL)
-    {
-        printf("WARNING!!! Cannot print contents of empty list!\n");
-        return PRINT_EMPTY_LIST_WARNING;
-    }
-
-
     // Print data to file
     while (current != NULL)
     {
         fprintf(file, "%s %s %d\n",
-        current->name, current->surname, current->yearOfBirth);
+            current->data.name,
+            current->data.surname,
+            current->data.yearOfBirth);
 
         current = current->next;
     }
@@ -139,10 +133,7 @@ int ReadDataFromFile(position head)
     position previous = NULL;
 
     char bufferLine[FILE_LINE_BUFFER_LENGTH] = "\0";
-
-    char bufferName[NAME_LENGTH] = "\0";
-    char bufferSurname[SURNAME_LENGTH] = "\0";
-    int bufferYearOfBirth = 0;
+    personData bufferData = { "\0", "\0", 0 };
 
     FILE* file = NULL;
     char fileName[FILE_NAME_LENGTH] = "\0";
@@ -183,9 +174,9 @@ int ReadDataFromFile(position head)
         // Reset the buffer values
         strcpy(bufferLine, "\0");
 
-        strcpy(bufferName, "\0");
-        strcpy(bufferSurname, "\0");
-        bufferYearOfBirth = 0;
+        strcpy(bufferData.name, "\0");
+        strcpy(bufferData.surname, "\0");
+        bufferData.yearOfBirth = 0;
 
         // Read a line from file
         fgets(bufferLine, FILE_LINE_BUFFER_LENGTH - 1, file);
@@ -193,20 +184,19 @@ int ReadDataFromFile(position head)
         {
             // Line contains data
             sscanf(bufferLine, " %s %s %d",
-            bufferName, bufferSurname, &bufferYearOfBirth);
+                bufferData.name,
+                bufferData.surname,
+                &bufferData.yearOfBirth);
 
             // Insert to list
             if (insertMode == USER_FILE_IN_ORDER ||
                 insertMode == USER_FILE_REVERSE_ORDER)
             {
-                returnValue = Insert(previous, bufferName,
-                bufferSurname, bufferYearOfBirth);
+                returnValue = Insert(previous, bufferData);
             }
             else if (insertMode == USER_FILE_SORTED)
             {
-                returnValue = InsertSorted(previous, bufferName,
-                    bufferSurname,
-                    bufferYearOfBirth);
+                returnValue = InsertSorted(previous, bufferData);
             }
 
             // Check if data was inserted correctly
@@ -308,11 +298,11 @@ int GetFileInsertMode(void)
    \brief Get file name from the user
    \param String to contain file name
 */
-int GetFileName(char* target)
+int GetFileName(char* fileName)
 {
     printf("Please enter the name of the file:\n");
     printf("Format: [fileName.txt]\n");
-    scanf(" %s", target);
+    scanf(" %s", fileName);
 
     return VOID_OK;
 }

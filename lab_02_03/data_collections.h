@@ -10,15 +10,21 @@
 
     #include "internal_dependencies.h"
 
+    struct _personData;
+    typedef struct _personData personData;
+    struct _personData
+    {
+        char name[NAME_LENGTH];
+        char surname[SURNAME_LENGTH];
+        int yearOfBirth;
+    };
+
     struct _person;
     typedef struct _person person;
     typedef person* position;
     struct _person
     {
-        char name[NAME_LENGTH];
-        char surname[SURNAME_LENGTH];
-        int yearOfBirth;
-
+        personData data;
         position next;
     };
 

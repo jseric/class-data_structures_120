@@ -8,7 +8,7 @@
     #define FUNCTION_DECLARATIONS_H
 
     int MenuIO(void);
-    int GetNodeDataFromUser(char*, char*, int*);
+    int GetNodeDataFromUser(personData*);
     int GetLastName(char*, char const*);
     int PrintListToConsole(position);
     int PrintListToFile(position);
@@ -18,26 +18,23 @@
     int InsertToEnd(position);
     int InsertBefore(position);
     int InsertAfter(position);
-    int InsertSorted(position,
-        char const*,
-        char const*, const int);
-    int Insert(position, char const*,
-        char const*, const int);
+    int InsertSorted(position, const personData);
+    int Insert(position, const personData);
 
     int DeleteAll(position);
     int DeleteNode(position);
 
     int Sort(position);
 
-    position CreateNewElement(
-        char const*,
-        char const*,
-        const int);
+    position CreateNewElement(const personData);
 
     int Find(position);
     position FindLast(position);
-    position FindPrevious(position, char const*);
-    position FindByLastName(position, char const*);
-    position FindPreviousSorted(position, char const*);
+    position FindPrevious(position,
+                          char const*);
+    position FindByLastName(position,
+                            char const*);
+    position FindPreviousSorted(position,
+                                char const*);
 
 #endif
