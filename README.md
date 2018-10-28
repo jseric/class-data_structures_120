@@ -2,7 +2,7 @@
 
 ## Laboratorijske vježbe
 
-Ovdje možete pronaći riješene laboratorijske vježbe iz kolegija Strukture podataka, na 2. godini prediplomskog studija računarstva na FESBU-u.
+Ovdje možete pronaći riješene laboratorijske vježbe iz kolegija Strukture podataka, na 2. godini prediplomskog studija računarstva na FESB-u.
 
 ## Motivacija
 
