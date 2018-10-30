@@ -1,4 +1,9 @@
-#include <stdio.h>
+/*!
+   \file io.c
+   \brief File containing IO (Input-Output) functions
+   \author Josip Seric
+   \date 24/10/2018
+*/
 
 #include "external_dependencies.h"
 #include "internal_dependencies.h"
