@@ -38,6 +38,11 @@ Svrha ovog repozitorija jest da studentima pomogne pri učenju gradiva iz predav
 - Ne ponavljati isti kod 2 puta (ukoliko 2 puta pišete isti kod,
   onda taj kod napisati u zasebnu funkciju)
 
+- Svaka funkcija obavlja samo jednu zadaću (čitanje iz file-a, pisanje u file,
+  alokacija memorije, umetanje u listu/stablo...)
+
+- I za kraj: KISS!!! (Keep It Simple & Stupid)
+
 ## Primjedbe, savjeti i upiti
 
 Za sve upite možete mi se javiti na laboratorijskim vježbama, ili na mail (josip.seric@icloud.com), kao i kolegi Duji Senti i profesoru Crnjcu.
