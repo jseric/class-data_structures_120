@@ -1,3 +1,10 @@
+/*!
+   \file list_management.c
+   \brief File containing list management function
+   \author Josip Seric
+   \date 23/10/2018
+*/
+
 #include "external_dependencies.h"
 #include "internal_dependencies.h"
 
